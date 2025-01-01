@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+        .container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 400px;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .input-section {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+        input[type="text"], textarea {
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            outline: none;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            background: #667eea;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li {
+            background: #f4f4f4;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .delete {
+            background: #ff6b6b;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>To-Do List</h1>
+        <div class="input-section">
+            <input type="text" id="taskTitle" placeholder="Task Title">
+            <textarea id="taskDescription" placeholder="Task Description"></textarea>
+            <button onclick="addTask()">Add</button>
+        </div>
+        <ul id="taskList"></ul>
+    </div>
+
+    <script>
+        function addTask() {
+            const taskTitle = document.getElementById('taskTitle');
+            const taskDescription = document.getElementById('taskDescription');
+            const taskList = document.getElementById('taskList');
+            const titleText = taskTitle.value.trim();
+            const descriptionText = taskDescription.value.trim();
+
+            if (titleText === '' || descriptionText === '') {
+                alert('Please enter both title and description!');
+                return;
+            }
+
+            const li = document.createElement('li');
+            li.innerHTML = `<div><strong>${titleText}</strong><p>${descriptionText}</p></div> <button class="delete" onclick="deleteTask(this)">X</button>`;
+            taskList.appendChild(li);
+
+            taskTitle.value = '';
+            taskDescription.value = '';
+        }
+
+        function deleteTask(button) {
+            const li = button.parentElement;
+            li.remove();
+        }
+    </script>
+</body>
+</html>
